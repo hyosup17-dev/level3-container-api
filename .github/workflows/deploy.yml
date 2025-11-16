@@ -16,7 +16,7 @@ env:
 jobs:
   deploy:
     name: Build and Deploy
-    runs_on: ubuntu-latest # Linux 가상 머신에서 실행
+    runs-on: ubuntu-latest # Linux 가상 머신에서 실행
 
     steps: 
       # --- 1. 코드 가져오기 ---
