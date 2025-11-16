@@ -1,0 +1,32 @@
+
+# 1. 여기에 우리가 실행할 '서비스(컨테이너)'들을 정의합니다.
+services:
+
+  # A. 'API 앱' 서비스 (이름은 'api'로 지정)
+  api:
+    build: ./app # './app' 폴더의 Dockerfile을 사용해 빌드
+    ports: 
+      - "5000:5000" # 내 컴퓨터(host) 5000번 포트와 컨테이너 5000번 포트를 연결
+    environment: 
+      # app.py가 읽을 환경 변수를 여기서 주입!
+      - DB_HOST=db                    # ★★★ DB 호스트 이름으로 'db' 서비스 이름을 사용
+      - DB_PORT=5432                  
+      - DB_USER=postgres
+      - DB_PASSWORD=mysecretpassword
+      - DB_NAME=postgres
+    depends_on:
+      - db                              # 'db' 서비스가 먼저 시작될 때까지 기다립니다.
+
+  # B. '데이터베이스' 서비스 (이름은 'db'로 지정)
+  db:
+    image: postgres:15-alpine # Docker Hub에서 공식 Postgres 15 이미지 사용
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword # API가 사용할 비밀번호
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/ # DB 데이터를 내 컴퓨터에 저장 (영속성)
+
+# 2. 위 'volumes'에서 사용한 'postgres_data'를 정의합니다.
+volumes:
+  postgres_data:

@@ -1,0 +1,14 @@
+# Terraform provider plugins, state, and vars
+# (테라폼 플러그인, 상태 파일 등 무시)
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/*.tfvars
+
+# Python cache
+app/__pycache__/
+*.pyc
+
+# OS specific
+.DS_Store
+Thumbs.db
