@@ -48,8 +48,6 @@ jobs:
           push: true
           # :latest 태그를 붙여서 ECR_REPOSITORY_URL로 푸시
           tags: ${{ env.ECR_REPOSITORY_URL }}:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       # --- 5. ECS 서비스 강제 재배포 ---
       # (Phase 4의 'ECS 콘솔 클릭' 자동화)
