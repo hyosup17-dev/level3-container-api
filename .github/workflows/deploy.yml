@@ -11,7 +11,7 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   ECR_REPOSITORY_URL: ${{ secrets.ECR_REPOSITORY_URL }}
   ECS_CLUSTER_NAME: ${{ secrets.ECS_CLUSTER_NAME }}
-  ECR_SERVICE_NAME: ${{ secrets.ECR_SERVICE_NAME }}
+  ECR_SERVICE_NAME: ${{ secrets.ECS_SERVICE_NAME }}
 
 jobs:
   deploy:
@@ -53,5 +53,5 @@ jobs:
       # (Phase 4의 'ECS 콘솔 클릭' 자동화)
       - name: Force new deployment on ECS
         run: |
-          echo "Forcing new deployment for service: ${{ env.ECR_SERVICE_NAME }} in cluster: ${{ env.ECS_CLUSTER_NAME }}"
-          aws ecs update-service --cluster ${{ env.ECS_CLUSTER_NAME }} --service ${{ env.ECR_SERVICE_NAME }} --force-new-deployment
+          echo "Forcing new deployment for service: ${{ env.ECS_SERVICE_NAME }} in cluster: ${{ env.ECS_CLUSTER_NAME }}"
+          aws ecs update-service --cluster ${{ env.ECS_CLUSTER_NAME }} --service ${{ env.ECS_SERVICE_NAME }} --force-new-deployment
